@@ -97,7 +97,7 @@ export default function StudentDashboard() {
           {/* Action Trigger Button */}
           <div className="mt-8 flex justify-end">
             <button 
-              onClick={() => alert('Starting AI engine question synthesis...')}
+              onClick={() => window.location.href = '/interview'}
               className="rounded-lg bg-indigo-600 px-6 py-3 font-semibold text-white shadow-md hover:bg-indigo-500"
             >
               Start Weekly AI Interview
