@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Technical Evaluator & Interview Proctoring Platform
 
-## Getting Started
+An advanced, production-ready full-stack AI evaluation workspace built for higher education institutions. This application enables engineering faculty to conduct rigorous, turn-by-turn technical interview simulations while monitoring candidate integrity via automated live proctoring vectors.
 
-First, run the development server:
+## 🚀 Core Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### 1. Candidate Verification Terminal
+* **Dynamic Authentication**: Eliminates static testing placeholders. Requires candidates to verify their Full Name and Academic Roll Number prior to unlocking the testing grid workspace.
+* **Live Profile Binding**: Maps candidate data instantly across the active evaluation cycle and webcam video overlay components.
+
+### 2. Standalone Keyword Assessment Engine
+* **Deterministic Tracking Layer**: Runs entirely local within a Python FastAPI environment—**zero external API keys or cloud network connections required**.
+* **Adaptive Turn-by-Turn Routing**: Dynamically scans candidate syntax for key low-level engineering constructs (`malloc`, `free`, `realloc`, `pointer`, `heap`, `contiguous`). 
+* **Dynamic Feedback Delivery**: Serves advanced hardware-level edge cases to high-performing responses while redirecting superficial answers to core fundamentals.
+
+### 3. Automated Security Proctoring System
+* **Integrity Monitoring Hooks**: Utilizes native browser event listeners (`visibilitychange` and `blur`) to catch tab switching, minimized browser windows, or workspace defection.
+* **Live In-Stream Alerts**: Instantly prints visual security warnings within the candidate's view and logs aggregated incident values.
+* **Time-Out Protection**: Keeps sessions moving forward with an automated 60-second response countdown clock that automatically submits fallback event flags upon expiration.
+
+### 4. Faculty Administration Dashboard
+* **Real-Time Data Feed**: Directly communicates with a Cloud Supabase architecture to fetch aggregated data indices.
+* **Automated Data Exporter**: Compiles records instantly into downloadable spreadsheet formatting via a standalone client `.CSV` exporter utility block.
+
+---
+
+## 🏗️ Architecture Stack
+
+* **Frontend**: Next.js 14+ (App Router), TypeScript, Tailwind CSS, Lucide Icons.
+* **Backend**: Python 3.10+, FastAPI, Uvicorn, Pydantic.
+* **Database**: Cloud Supabase (PostgreSQL tables synced live).
+
+---
+
+## 🛠️ Step-by-Step Installation & Local Setup
+
+Follow these quick commands to spin up the full production workspace locally:
+
+### 1. Prerequisites
+Ensure you have the following packages installed on your system terminal:
+* **Node.js** (v18.0 or later)
+* **Python** (v3.10 or later)
+
+### 2. Environment Variables Setup
+Create a `.env.local` file inside the root directory and connect your database tracking configuration lines:
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_public_key
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Initialize the Python FastAPI Service
+Open a separate execution terminal prompt pointing to your backend application location:
+```bash
+# Navigate to the backend directory
+cd ai-interview-backend
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Spin up the standalone engine server on local port 8000
+uvicorn main:app --reload --port 8000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Launch the Next.js Frontend Framework
+Open an independent command terminal workspace pointing to the main project root environment:
+```bash
+# Install required node modules and library dependencies
+npm install
 
-## Learn More
+# Boot up the development workspace instance on local port 3000
+npm run dev
+```
+Open your internet browser window and navigate straight to: `http://localhost:3000/student/interview`
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📊 Database Schema Matrix
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Data rows are written out live to a `interview_scores` relational table containing these columns:
+* `id` (uuid, primary key)
+* `student_name` (text)
+* `roll_number` (text)
+* `topic_title` (text)
+* `score_percentage` (int8)
+* `evaluation_status` (text) -> Automatically flagged as `Flagged` if technical grade is \(< 50\%\) or security violation metrics are logged.
+* `created_at` (timestamptz)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📜 Capstone Development Attributions
+Developed by **Jahnavi Surepalli** as part of the final course submission analysis module for the Artificial Intelligence program under **Youth Empowerment India**.
